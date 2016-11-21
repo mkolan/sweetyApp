@@ -1,0 +1,26 @@
+<%= form_for @reading do |form| %>
+
+  <% if @reading.errors.any? %>
+    <div id="error_explanation">
+      <h2>
+        <%= pluralize(@reading.errors.count, "error") %> prohibited
+        this reading from being saved:
+      </h2>
+      <ul>
+        <% @reading.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+<div class="form-group">
+  <%= form.label :description %>
+  <%= form.text_field :description, class: "form-control" %>
+
+  <%= form.label :blood_sugar %>
+  <%= form.text_field :blood_sugar, class: "form-control" %>
+  
+</div>
+<%= form.submit class: "btn btn-primary" %>
+<% end %>

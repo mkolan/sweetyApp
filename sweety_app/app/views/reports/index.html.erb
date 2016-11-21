@@ -1,0 +1,19 @@
+<h3> Reports for the user <%= (User.find @user_id).email %> </h3>
+</br>
+<%= form_tag(daily_path(@user_id)) do %>
+  <%= label_tag :on_date %>
+  <%= date_field_tag(:on_date) %>
+<%= submit_tag("Generate daily report", class: "btn btn-large btn-primary") %>
+<% end %>
+</br>
+<%= form_tag(month_to_date_path(@user_id)) do %>
+  <%= label_tag :to_date %>
+  <%= date_field_tag(:to_date) %>
+  <%= submit_tag("Generate month to day report", class: "btn btn-large btn-primary") %>
+<% end %>
+</br>
+<%= form_tag(monthly_path(@user_id)) do %>
+  <%= label_tag :to_date %>
+  <%= date_field_tag(:to_date) %>
+  <%= submit_tag("Generate monthly report", class: "btn btn-large btn-primary") %>
+<% end %>

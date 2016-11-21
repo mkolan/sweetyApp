@@ -1,0 +1,28 @@
+<h3> Sugar readings of the user <%= current_user.email %> </h3>
+</br>
+<table class="table">
+  <tr>
+    <th>User</th>
+    <th>Blood Sugar</th>
+    <th>Description</th>
+    <th>Created</th>
+    <th>Actions</th>
+    <th> </th>
+  </tr>
+
+  <% if @sugar_readings.present? %>
+    <% @sugar_readings.each do |sr| %>
+      <tr class=<%= %(reading_row_#{sr.id}) %> >
+        <td><%= sr.user.email %></td>
+        <td><%= "#{sr.blood_sugar} mg/dl" %></td>
+        <td><%= sr.description %></td>
+        <td><%= "#{time_ago_in_words(sr.created_at)} ago" %></td>
+        <td><%= link_to "edit", edit_sugar_reading_path(sr.id), class: 'btn btn-primary btn-lg' %></td>
+        <td><%= link_to "delete", sugar_reading_path(sr), method: :delete, class: 'btn btn-primary btn-lg'%></td>
+      </tr>
+    <% end %>
+  <% end %>
+</table>
+
+</br>
+<%= link_to "New reading", new_sugar_reading_path, class: 'btn btn-primary btn-lg' %>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Sweety App</title>
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+    <%= csrf_meta_tags %>
+</head>
+<body>
+
+    <nav class="navbar navbar-inverse">
+        <div class="container">
+            <div class="navbar-header">
+                <% if current_user %>
+                   <% if current_user.user_type == "patient" %> 
+                     <%= link_to 'Sweety App', sugar_readings_path, class: 'navbar-brand' %>
+                   <% else %>
+                      <%= link_to 'Sweety App', patients_list_path, class: 'navbar-brand' %>
+                   <% end %>
+                <% else %>
+                  <%= link_to 'Sweety App', root_path, class: 'navbar-brand' %>
+                <% end %>
+            </div>
+            <div id="navbar">
+                <ul class="nav navbar-nav navbar-right">
+                    <% if current_user %>
+                       <% if current_user.user_type == "patient" %>
+                          <li><%= link_to 'Reports', reports_path(current_user.id), class: 'navbar-brand' %></li>
+                       <% end %>
+                        <li><%= link_to current_user.email, user_path(current_user) %></li>
+                        <li><%= link_to 'Sign Out', sign_out_path, method: :delete, id: 'sign-out' %></li>
+                    <% else %>
+                        <li><%= link_to 'Sign In', sign_in_path, id: 'sign-in' %></li>
+                    <% end %>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <% flash.each do |key, value| %>
+            <div class="alert alert-<%= key %>">
+                <%= value %>
+            </div>
+        <% end %>
+
+        <%= yield %>
+    </div>
+
+</body>
+</html>

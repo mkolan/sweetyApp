@@ -1,0 +1,9 @@
+<h1>Month to Date Reports</h1>
+
+<ul>
+  <li><%= 'Highest glucose level ' + SugarReading.glucose_max(@report).to_s + ' mg/dl' %></li>
+  <li><%= 'Lowest glucose level ' + SugarReading.glucose_min(@report).to_s + ' mg/dl' %></li>
+  <li><%= 'Average glucose levels ' + SugarReading.glucose_avg(@report).to_s + ' mg/dl' %></li>
+</ul>
+<%= link_to 'Back to Reports', reports_path %>
+
